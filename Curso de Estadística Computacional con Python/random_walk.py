@@ -4,6 +4,13 @@
 from drunkGuy import TraditionalDrunk
 from field import Field
 from location import Location
+from bokeh.plotting import figure, show
+
+def graphing(x,y):
+    graph = figure(title= "Random Walk",x_axis_label="Steps", y_axis_label="distance")
+    graph.line(x,y, legend="mid distance")
+
+    show(graph)    
 
 def walk(field,drunkGuy,steps):
     start = field.get_location(drunkGuy)
@@ -28,16 +35,18 @@ def simulate_walk(steps,number_of_walks,type_of_drunkGuy):
     return distance
 
 def main(steps_walked,number_of_walks,type_of_drunkGuy):
+    mid_distance_per_walk=[]
     for steps in steps_walked:
         distance = simulate_walk(steps,number_of_walks,type_of_drunkGuy)
         medium_distance = round(sum(distance)/len(distance),4)
         max_distance= max(distance)
         min_distance= min(distance)
-
+        mid_distance_per_walk.append(medium_distance)
         print (f'{type_of_drunkGuy.__name__} random walk of {steps} steps')
         print(f'Medium distance = {medium_distance}')
         print(f'Max distance = {max_distance}')
         print(f'Min distance = {min_distance}')
+    graphing(steps_walked, mid_distance_per_walk)
 
 
 if __name__ == '__main__':
