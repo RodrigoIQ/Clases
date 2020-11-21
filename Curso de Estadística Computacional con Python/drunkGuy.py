@@ -3,3 +3,7 @@
 class DrunkGuy:
     def __init__(self,name):
         self.name = name
+
+class TraditionalDrunk:
+    def __init__(self):
+        super().__init__()
